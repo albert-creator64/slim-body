@@ -14,13 +14,12 @@
     <div class="header-bg"></div>
     <div class="header-content">
       <div class="badge">БЕСПЛАТНАЯ ПРОГРАММА</div>
-      <h1>Сбрось <span class="hl">-20 кг</span> за 30 дней</h1>
-      <p class="sub">Научная программа питания и тренировок. Полностью бесплатно.</p>
-      <a href="#params" class="btn-hero">Начать сейчас</a>
+      <h1>Сбрось вес <span class="hl">с умом</span></h1>
+      <p class="sub">Научная программа питания и тренировок. Введите параметры — получите план.</p>
+      <a href="#params" class="btn-hero">Начать</a>
     </div>
   </header>
 
-  <!-- Параметры тела -->
   <section class="section" id="params">
     <h2 class="section-title">📐 Ваши параметры</h2>
     <div class="card params-card">
@@ -28,73 +27,37 @@
         <div class="field"><label>Рост (см)</label><input type="number" id="inHeight" placeholder="170" min="100" max="250"></div>
         <div class="field"><label>Вес (кг)</label><input type="number" id="inWeight" placeholder="90" min="30" max="300"></div>
       </div>
-      <button class="btn-save" onclick="saveParams()">Сохранить</button>
-      <div id="paramResult" style="display:none">
-        <div class="param-grid">
-          <div class="param-box"><span class="param-val" id="outIMT">—</span><span class="param-label">ИМТ</span></div>
-          <div class="param-box"><span class="param-val" id="outNorm">—</span><span class="param-label">Норма</span></div>
-          <div class="param-box"><span class="param-val" id="outDiff">—</span><span class="param-label">Нужно сбросить</span></div>
-          <div class="param-box"><span class="param-val" id="outCal">—</span><span class="param-label">Калорий/день</span></div>
-        </div>
-        <div class="param-bar-wrap">
-          <div class="param-bar-label"><span id="barCur"></span> → <span id="barGoal"></span> кг</div>
-          <div class="param-bar"><div class="param-bar-fill" id="barFill"></div></div>
-        </div>
-        <div id="imtStatus" class="imt-status"></div>
+      <div class="field-row">
+        <div class="field"><label>Пол</label><select id="inSex"><option value="m">Мужской</option><option value="f" selected>Женский</option></select></div>
+        <div class="field"><label>Возраст</label><input type="number" id="inAge" placeholder="30" min="14" max="100"></div>
       </div>
     </div>
+
+    <h2 class="section-title" id="goalTitle" style="display:none">🎯 Ваша цель</h2>
+    <div class="card params-card" id="goalCard" style="display:none">
+      <div class="field-row">
+        <div class="field"><label>Сбросить (кг)</label><input type="number" id="inGoalKg" placeholder="10" min="1" max="100"></div>
+        <div class="field"><label>На сколько дней</label><input type="number" id="inGoalDays" placeholder="30" min="7" max="365"></div>
+      </div>
+      <button class="btn-save" onclick="buildPlan()">Составить план</button>
+    </div>
+
+    <div id="planSummary" style="display:none"></div>
   </section>
 
-  <section class="section">
-    <div class="card dark">
-      <div class="card-icon">⚡</div>
-      <h2>Почему не получалось раньше?</h2>
-      <ul class="list">
-        <li><span class="x">✕</span> Диеты замедляют метаболизм</li>
-        <li><span class="x">✕</span> Нет системы — срыв через неделю</li>
-        <li><span class="x">✕</span> Голод приводит к набору веса</li>
-        <li><span class="x">✕</span> Нет поддержки и мотивации</li>
-      </ul>
-    </div>
-    <div class="card green">
-      <div class="card-icon">✅</div>
-      <h2>Наш подход</h2>
-      <ul class="list">
-        <li><span class="v">✓</span> Правильный дефицит калорий</li>
-        <li><span class="v">✓</span> Сбалансированное питание 5 раз в день</li>
-        <li><span class="v">✓</span> Тренировки 4 раза в неделю</li>
-        <li><span class="v">✓</span> Всё бесплатно, без регистрации</li>
-      </ul>
-    </div>
+  <section class="section" id="secMenu" style="display:none">
+    <h2 class="section-title">🍽️ Ваше меню на день</h2>
+    <div id="menuContainer"></div>
+    <div id="menuTotals"></div>
   </section>
 
-  <section class="section">
-    <h2 class="section-title">📊 Что в программе</h2>
-    <div class="card">
-      <div class="feature"><div class="feature-icon">🍽️</div><div><b>План питания</b><br><span class="dim">Меню на 30 дней, рецепты, список покупок</span></div></div>
-    </div>
-    <div class="card">
-      <div class="feature"><div class="feature-icon">🏋️</div><div><b>Тренировки</b><br><span class="dim">Дома или в зале, 4 раза в неделю</span></div></div>
-    </div>
-    <div class="card">
-      <div class="feature"><div class="feature-icon">📊</div><div><b>Трекер прогресса</b><br><span class="dim">Ваш вес и ИМТ сохраняются на устройстве</span></div></div>
-    </div>
+  <section class="section" id="secShopping" style="display:none">
+    <h2 class="section-title">🛒 Список покупок на неделю</h2>
+    <div class="card" id="shoppingList"></div>
   </section>
 
-  <section class="section">
-    <h2 class="section-title">📅 Пример меню на день</h2>
-    <div class="card timeline">
-      <div class="tl-item"><div class="tl-time">08:00</div><div class="tl-meal">Овсянка с ягодами + яйцо</div><div class="tl-cal">350 ккал</div></div>
-      <div class="tl-item"><div class="tl-time">11:00</div><div class="tl-meal">Творог 2% + орехи</div><div class="tl-cal">220 ккал</div></div>
-      <div class="tl-item"><div class="tl-time">14:00</div><div class="tl-meal">Куриная грудка + гречка + овощи</div><div class="tl-cal">450 ккал</div></div>
-      <div class="tl-item"><div class="tl-time">17:00</div><div class="tl-meal">Яблоко + ряженка</div><div class="tl-cal">180 ккал</div></div>
-      <div class="tl-item"><div class="tl-time">20:00</div><div class="tl-meal">Рыба запечённая + салат</div><div class="tl-cal">380 ккал</div></div>
-      <div class="tl-total">ИТОГО: 1580 ккал · Б: 120г · Ж: 45г · У: 150г</div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">💪 Расписание тренировок</h2>
+  <section class="section" id="secWorkout" style="display:none">
+    <h2 class="section-title">💪 Тренировки</h2>
     <div class="card">
       <div class="day-row"><span class="day-dot green-dot"></span><b>Пн</b> Кардио 40 мин</div>
       <div class="day-row"><span class="day-dot yellow-dot"></span><b>Вт</b> Силовая верх</div>
@@ -107,47 +70,18 @@
   </section>
 
   <section class="section">
-    <h2 class="section-title">🏆 Результаты</h2>
-    <div class="card result-card">
-      <div class="result-header">
-        <div class="result-avatar">Е</div>
-        <div><b>Елена, 34 года</b><br><span class="dim">Потеряла 18 кг за 30 дней</span></div>
-      </div>
-      <p class="result-text">«Я пробовала десятки диет. Только здесь я наконец почувствовала, что ем нормально и худею. Результат превзошёл ожидания!»</p>
-    </div>
-    <div class="card result-card">
-      <div class="result-header">
-        <div class="result-avatar">А</div>
-        <div><b>Андрей, 28 лет</b><br><span class="dim">Потерял 22 кг за 35 дней</span></div>
-      </div>
-      <p class="result-text">«Живот ушёл, появились мышцы. Тренировки короткие, но эффективные. Питание сытное, не голодал.»</p>
-    </div>
-    <div class="card result-card">
-      <div class="result-header">
-        <div class="result-avatar">М</div>
-        <div><b>Мария, 41 год</b><br><span class="dim">Потеряла 16 кг за 28 дней</span></div>
-      </div>
-      <p class="result-text">«После вторых родов не могла похудеть 3 года. Минус 16 кг, энергия как в 20 лет!»</p>
-    </div>
-  </section>
-
-  <section class="section">
     <h2 class="section-title">❓ Частые вопросы</h2>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Безопасно ли худеть на 20 кг за месяц?<span class="faq-arrow">▾</span></div>
-      <div class="faq-a">Программа основана на научных принципах: дефицит калорий 20-25%, высокое потребление белка. Средний результат — минус 15-20 кг за месяц. Рекомендуем проконсультироваться с врачом.</div>
+      <div class="faq-q">Безопасно ли худеть быстро?<span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Программа рассчитывает безопасный дефицит калорий 20-30%. Рекомендуем проконсультироваться с врачом перед началом.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Нужен ли спортзал?<span class="faq-arrow">▾</span></div>
       <div class="faq-a">Нет. Все тренировки адаптированы для дома без оборудования.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Можно ли есть сладкое?<span class="faq-arrow">▾</span></div>
-      <div class="faq-a">Да, в меню есть рецепты десертов без сахара и муки. Шоколад 85%+ допускается в небольших количествах.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Сохраняются ли мои данные?<span class="faq-arrow">▾</span></div>
-      <div class="faq-a">Да, ваш рост и вес сохраняются прямо в браузере на вашем устройстве. Ничего не отправляется на сервер.</div>
+      <div class="faq-a">Да, все параметры и план сохраняются в браузере на вашем устройстве. Ничего не отправляется на сервер.</div>
     </div>
   </section>
 

@@ -87,6 +87,38 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s;font-size:13px;color:#888;line-height:1.6;padding:0 16px}
 .faq-item.open .faq-a{max-height:200px;padding:0 16px 16px}
 
+.field select{width:100%;padding:13px 14px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.03);color:#ddd;font-size:14px;outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none;cursor:pointer}
+.field select:focus{border-color:#22c55e}
+
+.summary-card{border-color:rgba(34,197,94,.2);background:linear-gradient(160deg,#0f1a0f,#141c14)}
+.summary-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px;color:#aaa}
+.summary-row:last-child{border:none}
+.summary-row b{color:#fff;font-size:15px}
+.summary-row .hl{color:#22c55e;font-size:18px}
+.cal-highlight{background:rgba(34,197,94,.08);margin:8px -18px -18px;padding:12px 18px!important;border-radius:0 0 14px 14px;border:none!important}
+.cal-highlight b{color:#22c55e!important;font-size:20px!important}
+
+.menu-card{padding:14px}
+.menu-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.menu-label{font-size:13px;font-weight:700;color:#22c55e}
+.menu-time{font-size:12px;color:#666;margin-left:auto}
+.menu-cal{font-size:12px;color:#888;font-weight:600;background:rgba(255,255,255,.05);padding:2px 8px;border-radius:6px}
+.menu-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:8px}
+.menu-item{display:flex;align-items:center;gap:6px;padding:5px 0;font-size:12px;color:#aaa;border-bottom:1px solid rgba(255,255,255,.03)}
+.menu-item:last-child{border:none}
+.mi-name{flex:1}
+.mi-q{color:#888;min-width:50px;text-align:center}
+.mi-k{color:#666;min-width:55px;text-align:right}
+.menu-macros{display:flex;gap:12px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.05);font-size:11px;color:#888}
+
+.totals-card{text-align:center;border-color:rgba(34,197,94,.15)}
+.totals-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:10px}
+
+.shop-cat{font-size:12px;font-weight:700;color:#22c55e;text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(34,197,94,.15)}
+.shop-cat:first-child{margin-top:0}
+.shop-item{display:flex;justify-content:space-between;padding:7px 0;font-size:13px;color:#ccc;border-bottom:1px solid rgba(255,255,255,.03)}
+.shop-q{color:#888}
+
 .disclaimer .dim-card{background:#1a1412;border-color:rgba(234,179,8,.1)}
 
 .footer{padding:30px 20px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}

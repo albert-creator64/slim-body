@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Слим Боди — Программа похудения -20кг</title>
+<title>Слим Боди — Программа похудения</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -13,12 +13,37 @@
   <header class="header">
     <div class="header-bg"></div>
     <div class="header-content">
-      <div class="badge">ПРОВЕРЕНО 10 000+ ЧЕЛОВЕК</div>
+      <div class="badge">БЕСПЛАТНАЯ ПРОГРАММА</div>
       <h1>Сбрось <span class="hl">-20 кг</span> за 30 дней</h1>
-      <p class="sub">Научная программа питания и тренировок с персональным сопровождением</p>
-      <a href="#tarif" class="btn-hero">Начать сейчас</a>
+      <p class="sub">Научная программа питания и тренировок. Полностью бесплатно.</p>
+      <a href="#params" class="btn-hero">Начать сейчас</a>
     </div>
   </header>
+
+  <!-- Параметры тела -->
+  <section class="section" id="params">
+    <h2 class="section-title">📐 Ваши параметры</h2>
+    <div class="card params-card">
+      <div class="field-row">
+        <div class="field"><label>Рост (см)</label><input type="number" id="inHeight" placeholder="170" min="100" max="250"></div>
+        <div class="field"><label>Вес (кг)</label><input type="number" id="inWeight" placeholder="90" min="30" max="300"></div>
+      </div>
+      <button class="btn-save" onclick="saveParams()">Сохранить</button>
+      <div id="paramResult" style="display:none">
+        <div class="param-grid">
+          <div class="param-box"><span class="param-val" id="outIMT">—</span><span class="param-label">ИМТ</span></div>
+          <div class="param-box"><span class="param-val" id="outNorm">—</span><span class="param-label">Норма</span></div>
+          <div class="param-box"><span class="param-val" id="outDiff">—</span><span class="param-label">Нужно сбросить</span></div>
+          <div class="param-box"><span class="param-val" id="outCal">—</span><span class="param-label">Калорий/день</span></div>
+        </div>
+        <div class="param-bar-wrap">
+          <div class="param-bar-label"><span id="barCur"></span> → <span id="barGoal"></span> кг</div>
+          <div class="param-bar"><div class="param-bar-fill" id="barFill"></div></div>
+        </div>
+        <div id="imtStatus" class="imt-status"></div>
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="card dark">
@@ -38,36 +63,21 @@
         <li><span class="v">✓</span> Правильный дефицит калорий</li>
         <li><span class="v">✓</span> Сбалансированное питание 5 раз в день</li>
         <li><span class="v">✓</span> Тренировки 4 раза в неделю</li>
-        <li><span class="v">✓</span> Ежедневная поддержка куратора</li>
+        <li><span class="v">✓</span> Всё бесплатно, без регистрации</li>
       </ul>
     </div>
   </section>
 
   <section class="section">
-    <h2 class="section-title">📊 Что входит в программу</h2>
+    <h2 class="section-title">📊 Что в программе</h2>
     <div class="card">
-      <div class="feature">
-        <div class="feature-icon">🍽️</div>
-        <div><b>Индивидуальный план питания</b><br><span class="dim">Меню на 30 дней, рецепты, список покупок</span></div>
-      </div>
+      <div class="feature"><div class="feature-icon">🍽️</div><div><b>План питания</b><br><span class="dim">Меню на 30 дней, рецепты, список покупок</span></div></div>
     </div>
     <div class="card">
-      <div class="feature">
-        <div class="feature-icon">🏋️</div>
-        <div><b>Программа тренировок</b><br><span class="dim">Дома или в зале, 4 тренировки в неделю</span></div>
-      </div>
+      <div class="feature"><div class="feature-icon">🏋️</div><div><b>Тренировки</b><br><span class="dim">Дома или в зале, 4 раза в неделю</span></div></div>
     </div>
     <div class="card">
-      <div class="feature">
-        <div class="feature-icon">📱</div>
-        <div><b>Чат с куратором</b><br><span class="dim">Ответы на вопросы, контроль прогресса</span></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="feature">
-        <div class="feature-icon">📊</div>
-        <div><b>Трекер результатов</b><br><span class="dim">Еженедельное взвешивание и замеры</span></div>
-      </div>
+      <div class="feature"><div class="feature-icon">📊</div><div><b>Трекер прогресса</b><br><span class="dim">Ваш вес и ИМТ сохраняются на устройстве</span></div></div>
     </div>
   </section>
 
@@ -97,133 +107,27 @@
   </section>
 
   <section class="section">
-    <h2 class="section-title">🏆 Результаты наших клиентов</h2>
+    <h2 class="section-title">🏆 Результаты</h2>
     <div class="card result-card">
       <div class="result-header">
         <div class="result-avatar">Е</div>
         <div><b>Елена, 34 года</b><br><span class="dim">Потеряла 18 кг за 30 дней</span></div>
       </div>
-      <p class="result-text">«Я пробовала десятки диет. Только здесь я наконец почувствовала, что ем нормально и худею. Куратор каждый день писала, проверяла питание. Результат превзошёл ожидания!»</p>
+      <p class="result-text">«Я пробовала десятки диет. Только здесь я наконец почувствовала, что ем нормально и худею. Результат превзошёл ожидания!»</p>
     </div>
     <div class="card result-card">
       <div class="result-header">
         <div class="result-avatar">А</div>
         <div><b>Андрей, 28 лет</b><br><span class="dim">Потерял 22 кг за 35 дней</span></div>
       </div>
-      <p class="result-text">«За месяц сбросил 22 кг. Живот ушёл, появились мышцы. Тренировки короткие, но эффективные. Питание сытное, не голодал.»</p>
+      <p class="result-text">«Живот ушёл, появились мышцы. Тренировки короткие, но эффективные. Питание сытное, не голодал.»</p>
     </div>
     <div class="card result-card">
       <div class="result-header">
         <div class="result-avatar">М</div>
         <div><b>Мария, 41 год</b><br><span class="dim">Потеряла 16 кг за 28 дней</span></div>
       </div>
-      <p class="result-text">«После вторых родов не могла похудеть 3 года. Эта программа — подарок. Минус 16 кг, энергия как в 20 лет!»</p>
-    </div>
-  </section>
-
-  <section class="section" id="tarif">
-    <h2 class="section-title">💳 Выберите тариф</h2>
-
-    <div class="tarif-card">
-      <div class="tarif-name">Базовый</div>
-      <div class="tarif-price">2 990 ₽</div>
-      <div class="tarif-period">разовый платёж</div>
-      <ul class="tarif-features">
-        <li>План питания на 30 дней</li>
-        <li>Программа тренировок</li>
-        <li>Список покупок</li>
-        <li>Трекер результатов</li>
-      </ul>
-      <button class="btn-tarif" onclick="selectTarif('basic',2990)">Выбрать</button>
-    </div>
-
-    <div class="tarif-card premium">
-      <div class="tarif-badge">ПОПУЛЯРНЫЙ</div>
-      <div class="tarif-name">Премиум</div>
-      <div class="tarif-price">5 990 ₽</div>
-      <div class="tarif-period">разовый платёж</div>
-      <ul class="tarif-features">
-        <li>Всё из тарифа «Базовый»</li>
-        <li>Персональный куратор</li>
-        <li>Чат поддержки 24/7</li>
-        <li>Корректировка плана</li>
-        <li>Гарантия результата</li>
-      </ul>
-      <button class="btn-tarif premium-btn" onclick="selectTarif('premium',5990)">Выбрать</button>
-    </div>
-
-    <div class="tarif-card">
-      <div class="tarif-name">Максимум</div>
-      <div class="tarif-price">9 990 ₽</div>
-      <div class="tarif-period">разовый платёж</div>
-      <ul class="tarif-features">
-        <li>Всё из тарифа «Премиум»</li>
-        <li>Видео-консультация нутриолога</li>
-        <li>Индивидуальное меню</li>
-        <li>Программа на 60 дней</li>
-        <li>Пожизненный доступ к обновлениям</li>
-      </ul>
-      <button class="btn-tarif" onclick="selectTarif('max',9990)">Выбрать</button>
-    </div>
-  </section>
-
-  <section class="section" id="payment" style="display:none">
-    <h2 class="section-title">🔐 Оплата</h2>
-    <div class="card pay-card">
-      <div class="pay-summary">
-        <span>Тариф: <b id="payTarifName"></b></span>
-        <span class="pay-sum" id="paySum"></span>
-      </div>
-
-      <div class="pay-methods">
-        <button class="pay-method active" id="payCard" onclick="setPayMethod('card')">
-          <span class="pm-icon">💳</span>
-          <span>Банковская карта</span>
-        </button>
-        <button class="pay-method" id="payCrypto" onclick="setPayMethod('crypto')">
-          <span class="pm-icon">🪙</span>
-          <span>Цифровой рубль</span>
-        </button>
-      </div>
-
-      <div id="payCardForm">
-        <div class="field"><label>Номер карты</label><input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"></div>
-        <div class="field-row">
-          <div class="field"><label>Срок</label><input type="text" id="cardExpiry" placeholder="ММ/ГГ" maxlength="5" oninput="formatExpiry(this)"></div>
-          <div class="field"><label>CVC</label><input type="password" id="cardCvc" placeholder="•••" maxlength="3"></div>
-        </div>
-        <div class="field"><label>Имя владельца</label><input type="text" id="cardName" placeholder="IVAN IVANOV"></div>
-      </div>
-
-      <div id="payCryptoForm" style="display:none">
-        <div class="crypto-info">
-          <div class="crypto-icon">🏦</div>
-          <p>Оплата Цифровым рублём через приложение вашего банка</p>
-          <div class="crypto-steps">
-            <div class="crypto-step"><span class="cs-num">1</span> Нажмите «Оплатить»</div>
-            <div class="crypto-step"><span class="cs-num">2</span> Откройте уведомление в банковском приложении</div>
-            <div class="crypto-step"><span class="cs-num">3</span> Подтвердите платёж в Цифровых рублях</div>
-          </div>
-          <div class="bank-logos">
-            <span class="bank-logo">Сбер</span>
-            <span class="bank-logo">Т-Банк</span>
-            <span class="bank-logo">Газпром</span>
-            <span class="bank-logo">Альфа</span>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn-pay" id="btnPay" onclick="processPay()">
-        Оплатить <span id="btnPaySum"></span>
-      </button>
-      <div class="pay-secure">🔒 Безопасная оплата. Данные не хранятся на сервере.</div>
-    </div>
-
-    <div id="paySuccess" style="display:none" class="card success-card">
-      <div class="success-icon">✅</div>
-      <h2>Оплата прошла!</h2>
-      <p>Доступ к программе отправлен на вашу почту. Проверьте папку «Спам».</p>
-      <a href="#" class="btn-hero" onclick="scrollToTop()">На главную</a>
+      <p class="result-text">«После вторых родов не могла похудеть 3 года. Минус 16 кг, энергия как в 20 лет!»</p>
     </div>
   </section>
 
@@ -231,40 +135,31 @@
     <h2 class="section-title">❓ Частые вопросы</h2>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Безопасно ли худеть на 20 кг за месяц?<span class="faq-arrow">▾</span></div>
-      <div class="faq-a">Программа основана на научных принципах: дефицит калорий 20-25%, высокое потребление белка, постепенное увеличение активности. Средний результат — минус 15-20 кг за месяц. Мы рекомендуем проконсультироваться с врачом перед началом.</div>
+      <div class="faq-a">Программа основана на научных принципах: дефицит калорий 20-25%, высокое потребление белка. Средний результат — минус 15-20 кг за месяц. Рекомендуем проконсультироваться с врачом.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Нужен ли спортзал?<span class="faq-arrow">▾</span></div>
-      <div class="faq-a">Нет. Все тренировки адаптированы для дома без оборудования. Если есть абонемент — ещё лучше, программа подходит для обоих вариантов.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Что если не помогёт?<span class="faq-arrow">▾</span></div>
-      <div class="faq-a">На тарифах «Премиум» и «Максимум» действует гарантия результата: если не похудеете хотя бы на 10 кг — вернём деньги полностью.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Как происходит оплата?<span class="faq-arrow">▾</span></div>
-      <div class="faq-a">Принимаем банковские карты Visa, Mastercard, МИР, а также оплату Цифровым рублём через Сбер, Т-Банк, Газпромбанк и Альфа-Банк.</div>
+      <div class="faq-a">Нет. Все тренировки адаптированы для дома без оборудования.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Можно ли есть сладкое?<span class="faq-arrow">▾</span></div>
       <div class="faq-a">Да, в меню есть рецепты десертов без сахара и муки. Шоколад 85%+ допускается в небольших количествах.</div>
     </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Сохраняются ли мои данные?<span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Да, ваш рост и вес сохраняются прямо в браузере на вашем устройстве. Ничего не отправляется на сервер.</div>
+    </div>
   </section>
 
   <section class="section disclaimer">
     <div class="card dim-card">
-      <p class="dim">⚠️ Результаты индивидуальны. Перед началом программы проконсультируйтесь с врачом. Сайт не является медицинским учреждением.</p>
+      <p class="dim">⚠️ Результаты индивидуальны. Перед началом программы проконсультируйтесь с врачом.</p>
     </div>
   </section>
 
   <footer class="footer">
     <div class="footer-logo">SLIM BODY</div>
-    <div class="footer-links">
-      <a href="#">Политика конфиденциальности</a>
-      <a href="#">Оферта</a>
-      <a href="#">Контакты</a>
-    </div>
-    <div class="dim">© 2026 Slim Body. Все права защищены.</div>
+    <div class="dim">© 2026 Slim Body. Бесплатная программа похудения.</div>
   </footer>
 </div>
 <script src="app.js"></script>

@@ -15,8 +15,8 @@
     <div class="header-content">
       <div class="badge">БЕСПЛАТНАЯ ПРОГРАММА</div>
       <h1>Сбрось вес <span class="hl">с умом</span></h1>
-      <p class="sub">Научная программа питания и тренировок. Введите параметры — получите план.</p>
-      <a href="#params" class="btn-hero">Начать</a>
+      <p class="sub">Научная программа питания, тренировок и ходьбы.</p>
+      <button class="btn-hero" id="btnStart">Начать</button>
     </div>
   </header>
 
@@ -31,22 +31,33 @@
         <div class="field"><label>Пол</label><select id="inSex"><option value="m">Мужской</option><option value="f" selected>Женский</option></select></div>
         <div class="field"><label>Возраст</label><input type="number" id="inAge" placeholder="30" min="14" max="100"></div>
       </div>
+      <button class="btn-save" onclick="saveParams()">Далее</button>
     </div>
+  </section>
 
-    <h2 class="section-title" id="goalTitle" style="display:none">🎯 Ваша цель</h2>
-    <div class="card params-card" id="goalCard" style="display:none">
+  <section class="section" id="goalSec" style="display:none">
+    <h2 class="section-title">🎯 Ваша цель</h2>
+    <div class="card params-card">
       <div class="field-row">
         <div class="field"><label>Сбросить (кг)</label><input type="number" id="inGoalKg" placeholder="10" min="1" max="100"></div>
         <div class="field"><label>На сколько дней</label><input type="number" id="inGoalDays" placeholder="30" min="7" max="365"></div>
       </div>
       <button class="btn-save" onclick="buildPlan()">Составить план</button>
     </div>
+  </section>
 
-    <div id="planSummary" style="display:none"></div>
+  <section class="section" id="secSummary" style="display:none">
+    <h2 class="section-title">📋 Ваш план</h2>
+    <div id="planSummary"></div>
+  </section>
+
+  <section class="section" id="secSteps" style="display:none">
+    <h2 class="section-title">🚶 План ходьбы</h2>
+    <div id="stepsContainer"></div>
   </section>
 
   <section class="section" id="secMenu" style="display:none">
-    <h2 class="section-title">🍽️ Ваше меню на день</h2>
+    <h2 class="section-title">🍽️ Меню на день</h2>
     <div id="menuContainer"></div>
     <div id="menuTotals"></div>
   </section>
@@ -57,16 +68,8 @@
   </section>
 
   <section class="section" id="secWorkout" style="display:none">
-    <h2 class="section-title">💪 Тренировки</h2>
-    <div class="card">
-      <div class="day-row"><span class="day-dot green-dot"></span><b>Пн</b> Кардио 40 мин</div>
-      <div class="day-row"><span class="day-dot yellow-dot"></span><b>Вт</b> Силовая верх</div>
-      <div class="day-row"><span class="day-dot green-dot"></span><b>Ср</b> HIIT 30 мин</div>
-      <div class="day-row"><span class="day-dot"></span><b>Чт</b> Отдых / прогулка</div>
-      <div class="day-row"><span class="day-dot yellow-dot"></span><b>Пт</b> Силовая низ</div>
-      <div class="day-row"><span class="day-dot green-dot"></span><b>Сб</b> Кардио 40 мин</div>
-      <div class="day-row"><span class="day-dot"></span><b>Вс</b> Отдых</div>
-    </div>
+    <h2 class="section-title">💪 План тренировок на неделю</h2>
+    <div id="workoutContainer"></div>
   </section>
 
   <section class="section">
@@ -78,6 +81,10 @@
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Нужен ли спортзал?<span class="faq-arrow">▾</span></div>
       <div class="faq-a">Нет. Все тренировки адаптированы для дома без оборудования.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Сколько нужно ходить пешком?<span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Программа рассчитывает индивидуальную норму шагов на основе вашего веса и цели. Начните с минимума и увеличивайте постепенно.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Сохраняются ли мои данные?<span class="faq-arrow">▾</span></div>

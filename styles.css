@@ -32,6 +32,26 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
 .feature b{font-size:14px;color:#fff}
 .dim{color:#666;font-size:12px}
 
+.params-card{border-color:rgba(34,197,94,.15);background:linear-gradient(160deg,#0f1a0f,#141c14)}
+.btn-save{display:block;width:100%;padding:14px;border:none;border-radius:10px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 18px rgba(34,197,94,.3)}
+.btn-save:active{transform:scale(.97)}
+
+.param-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.param-box{background:rgba(255,255,255,.04);border-radius:10px;padding:14px 10px;text-align:center}
+.param-val{display:block;font-size:22px;font-weight:900;color:#22c55e}
+.param-label{display:block;font-size:11px;color:#888;margin-top:2px}
+
+.param-bar-wrap{margin-top:14px}
+.param-bar-label{display:flex;justify-content:space-between;font-size:12px;color:#aaa;margin-bottom:6px}
+.param-bar{height:10px;border-radius:5px;background:rgba(255,255,255,.06);overflow:hidden}
+.param-bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,#22c55e,#16a34a);transition:width .5s}
+
+.imt-status{margin-top:12px;padding:10px;border-radius:8px;font-size:13px;font-weight:600;text-align:center}
+.imt-under{background:rgba(59,130,246,.1);color:#60a5fa}
+.imt-normal{background:rgba(34,197,94,.1);color:#22c55e}
+.imt-over{background:rgba(234,179,8,.1);color:#eab308}
+.imt-obese{background:rgba(239,68,68,.1);color:#ef4444}
+
 .timeline{padding:18px 14px}
 .tl-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
 .tl-time{color:#22c55e;font-weight:700;font-size:13px;min-width:42px}
@@ -52,53 +72,13 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
 .result-header b{font-size:14px;color:#fff}
 .result-text{font-size:13px;color:#aaa;line-height:1.6;font-style:italic}
 
-.tarif-card{background:#141c14;border-radius:16px;padding:22px 18px;margin-bottom:14px;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden}
-.tarif-card.premium{border-color:rgba(34,197,94,.3);background:linear-gradient(160deg,#0f1a0f,#141c14)}
-.tarif-badge{position:absolute;top:12px;right:-28px;background:#22c55e;color:#fff;font-size:9px;font-weight:800;padding:4px 32px;transform:rotate(45deg);letter-spacing:1px}
-.tarif-name{font-size:13px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:1px}
-.tarif-price{font-size:36px;font-weight:900;color:#fff;margin:6px 0 2px}
-.tarif-period{font-size:12px;color:#666;margin-bottom:14px}
-.tarif-features{list-style:none;margin-bottom:16px}
-.tarif-features li{padding:6px 0;font-size:13px;color:#bbb;display:flex;align-items:center;gap:8px}
-.tarif-features li::before{content:'✓';color:#22c55e;font-weight:700}
-.btn-tarif{display:block;width:100%;padding:14px;border:none;border-radius:10px;background:rgba(255,255,255,.06);color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
-.btn-tarif:active{transform:scale(.97)}
-.premium-btn{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 4px 18px rgba(34,197,94,.3)}
-
-.pay-card{border-color:rgba(34,197,94,.12)}
-.pay-summary{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px;color:#ccc}
-.pay-sum{font-size:20px;font-weight:900;color:#22c55e}
-
-.pay-methods{display:flex;gap:8px;margin-bottom:18px}
-.pay-method{flex:1;padding:14px 8px;border:2px solid rgba(255,255,255,.08);border-radius:12px;background:transparent;color:#888;font-size:12px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all .2s}
-.pay-method.active{border-color:#22c55e;background:rgba(34,197,94,.08);color:#22c55e}
-.pm-icon{font-size:24px}
-
 .field{margin-bottom:12px}
 .field label{display:block;font-size:11px;color:#666;margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.field input,.field select{width:100%;padding:13px 14px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.03);color:#ddd;font-size:14px;outline:none;transition:border-color .2s}
+.field input{width:100%;padding:13px 14px;border:1px solid rgba(255,255,255,.08);border-radius:10px;background:rgba(255,255,255,.03);color:#ddd;font-size:14px;outline:none;transition:border-color .2s}
 .field input:focus{border-color:#22c55e}
 .field input::placeholder{color:#444}
 .field-row{display:flex;gap:10px}
 .field-row .field{flex:1}
-
-.crypto-info{text-align:center;padding:10px 0}
-.crypto-icon{font-size:48px;margin-bottom:12px}
-.crypto-info>p{font-size:13px;color:#aaa;margin-bottom:16px}
-.crypto-steps{text-align:left;margin-bottom:16px}
-.crypto-step{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:#ccc}
-.cs-num{width:24px;height:24px;border-radius:50%;background:rgba(34,197,94,.15);color:#22c55e;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.bank-logos{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.bank-logo{padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.04);font-size:11px;color:#888;font-weight:600}
-
-.btn-pay{display:block;width:100%;padding:16px;border:none;border-radius:12px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;font-size:16px;font-weight:800;cursor:pointer;margin-top:6px;box-shadow:0 6px 24px rgba(34,197,94,.3);transition:all .2s}
-.btn-pay:active{transform:scale(.97)}
-.pay-secure{text-align:center;margin-top:10px;font-size:11px;color:#555}
-
-.success-card{text-align:center;padding:30px 18px;border-color:rgba(34,197,94,.2)}
-.success-icon{font-size:48px;margin-bottom:12px}
-.success-card h2{color:#22c55e;margin-bottom:8px}
-.success-card p{font-size:13px;color:#aaa;margin-bottom:16px}
 
 .faq-item{background:#141c14;border-radius:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.04);overflow:hidden;cursor:pointer}
 .faq-q{padding:16px;font-size:14px;font-weight:600;color:#ddd;display:flex;justify-content:space-between;align-items:center}
@@ -110,6 +90,4 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans
 .disclaimer .dim-card{background:#1a1412;border-color:rgba(234,179,8,.1)}
 
 .footer{padding:30px 20px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
-.footer-logo{font-size:18px;font-weight:900;color:#22c55e;letter-spacing:2px;margin-bottom:12px}
-.footer-links{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.footer-links a{color:#666;font-size:12px;text-decoration:none}
+.footer-logo{font-size:18px;font-weight:900;color:#22c55e;letter-spacing:2px;margin-bottom:8px}

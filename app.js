@@ -1,72 +1,65 @@
-let selectedTarif=null;
-let payMethod='card';
-
 function toggleFaq(el){
   const wasOpen=el.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
   if(!wasOpen)el.classList.add('open');
 }
 
-function selectTarif(name,price){
-  selectedTarif={name,price};
-  document.getElementById('tarif').style.display='none';
-  const sec=document.getElementById('payment');
-  sec.style.display='block';
-  document.getElementById('payTarifName').textContent={
-    basic:'Базовый',premium:'Премиум',max:'Максимум'
-  }[name];
-  document.getElementById('paySum').textContent=price.toLocaleString('ru-RU')+' ₽';
-  document.getElementById('btnPaySum').textContent=price.toLocaleString('ru-RU')+' ₽';
-  sec.scrollIntoView({behavior:'smooth',block:'start'});
+function saveParams(){
+  const h=parseFloat(document.getElementById('inHeight').value);
+  const w=parseFloat(document.getElementById('inWeight').value);
+  if(!h||!w||h<100||h>250||w<30||w>300)return;
+  localStorage.setItem('sb_height',h);
+  localStorage.setItem('sb_weight',w);
+  showParams(h,w);
 }
 
-function setPayMethod(method){
-  payMethod=method;
-  document.getElementById('payCard').classList.toggle('active',method==='card');
-  document.getElementById('payCrypto').classList.toggle('active',method==='crypto');
-  document.getElementById('payCardForm').style.display=method==='card'?'block':'none';
-  document.getElementById('payCryptoForm').style.display=method==='crypto'?'block':'none';
-}
+function showParams(h,w){
+  const imt=(w/((h/100)*(h/100))).toFixed(1);
+  const normLow=18.5*(h/100)*(h/100);
+  const normHigh=25*(h/100)*(h/100);
+  let goalWeight=normHigh;
+  let status='',cls='';
+  if(imt<18.5){status='Недостаточный вес';cls='imt-under';goalWeight=w;}
+  else if(imt<25){status='Норма';cls='imt-normal';goalWeight=w;}
+  else if(imt<30){status='Избыточный вес';cls='imt-over';goalWeight=normHigh;}
+  else{status='Ожирение';cls='imt-obese';goalWeight=normHigh;}
+  const diff=Math.max(0,w-goalWeight).toFixed(1);
+  const bmr=Math.round(10*w+6.25*h-5*30+5);
+  const calIntake=Math.round(bmr*0.75);
 
-function formatCard(el){
-  let v=el.value.replace(/\D/g,'');
-  v=v.replace(/(.{4})/g,'$1 ').trim();
-  el.value=v;
-}
+  document.getElementById('outIMT').textContent=imt;
+  document.getElementById('outNorm').textContent=normLow.toFixed(0)+'-'+normHigh.toFixed(0);
+  document.getElementById('outDiff').textContent=diff+' кг';
+  document.getElementById('outCal').textContent=calIntake;
 
-function formatExpiry(el){
-  let v=el.value.replace(/\D/g,'');
-  if(v.length>=2)v=v.slice(0,2)+'/'+v.slice(2);
-  el.value=v;
-}
+  const pct=Math.min(100,Math.max(0,(1-diff/w)*100));
+  document.getElementById('barCur').textContent=w+' кг';
+  document.getElementById('barGoal').textContent=goalWeight.toFixed(0)+' кг';
+  document.getElementById('barFill').style.width=pct+'%';
 
-function processPay(){
-  const btn=document.getElementById('btnPay');
-  btn.textContent='Обработка...';
-  btn.style.opacity='.6';
-  setTimeout(()=>{
-    document.getElementById('payCardForm').style.display='none';
-    document.getElementById('payCryptoForm').style.display='none';
-    document.querySelector('.pay-methods').style.display='none';
-    document.querySelector('.pay-summary').style.display='none';
-    btn.style.display='none';
-    document.querySelector('.pay-card .pay-secure').style.display='none';
-    document.getElementById('paySuccess').style.display='block';
-    document.getElementById('paySuccess').scrollIntoView({behavior:'smooth',block:'start'});
-  },2000);
-}
+  const st=document.getElementById('imtStatus');
+  st.className='imt-status '+cls;
+  st.textContent=status+' (ИМТ '+imt+')';
+  if(diff>0)st.textContent+=' · цель: минус '+diff+' кг';
 
-function scrollToTop(){
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('paramResult').style.display='block';
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
+  const savedH=localStorage.getItem('sb_height');
+  const savedW=localStorage.getItem('sb_weight');
+  if(savedH&&savedW){
+    document.getElementById('inHeight').value=savedH;
+    document.getElementById('inWeight').value=savedW;
+    showParams(+savedH,+savedW);
+  }
+
   const observer=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}
     });
   },{threshold:0.1});
-  document.querySelectorAll('.card,.tarif-card,.faq-item').forEach(el=>{
+  document.querySelectorAll('.card,.faq-item').forEach(el=>{
     el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .5s,transform .5s';
     observer.observe(el);
   });
